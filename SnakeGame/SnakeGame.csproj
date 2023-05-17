@@ -211,6 +211,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ciclo.cs" />
+    <Compile Include="Configurações.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
