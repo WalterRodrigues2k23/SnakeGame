@@ -83,6 +83,7 @@
             this.Score.Size = new System.Drawing.Size(124, 18);
             this.Score.TabIndex = 2;
             this.Score.Text = "Pontuação: 0";
+            this.Score.Click += new System.EventHandler(this.Score_Click);
             // 
             // Recorde
             // 

@@ -86,10 +86,80 @@ namespace SnakeGame
 
         private void GameTimerEvent(object sender, EventArgs e)
         {
+            if (goLeft)
+            {
+                Configurações.direcoes = "Esquerda";
+            }
+            if (goRight)
+            {
+                Configurações.direcoes = "Direita";
+            }
+            if (goDown)
+            {
+                Configurações.direcoes = "Baixo";
+            }
+            if (goUp)
+            {
+                Configurações.direcoes = "Cima";
+            }
+
+            for (int i = Snake.Count; i < 0; i--)
+            {
+                if (i == 0)
+                {
+                    switch (Configurações.direcoes)
+                    {
+                        case "Esquerda":
+                            Snake[i].x--;
+                            break;
+                        case "Direita":
+                            Snake[i].x++;
+                            break;
+                        case "Baixo":
+                            Snake[i].y++;
+                            break;
+                        case "Cima":
+                            Snake[i].y--;
+                            break;
+                    }
+                }
+            }
 
         }
 
         private void UpdatePictureBoxGraphics(object sender, PaintEventArgs e)
+        {
+            Graphics canvas = e.Graphics;
+            Brush snakeColour;
+
+            for (int i = 0; i < Snake.Count; i++)
+            {
+                if (i == 0)
+                {
+                    snakeColour = Brushes.Black;
+                }
+                else
+                {
+                    snakeColour = Brushes.DarkGreen;
+                }
+
+                canvas.FillEllipse(snakeColour, new Rectangle
+                    (
+                    Snake[i].x * Configurações.Width,
+                    Snake[i].y * Configurações.Height,
+                    Configurações.Width, Configurações.Height
+                    ));
+            }
+
+            canvas.FillEllipse(Brushes.DarkRed, new Rectangle
+            (
+            food.x * Configurações.Width,
+            food.y * Configurações.Height,
+            Configurações.Width, Configurações.Height
+            ));
+        }
+
+        private void Score_Click(object sender, EventArgs e)
         {
 
         }
@@ -103,8 +173,20 @@ namespace SnakeGame
             Snake.Clear();
             StartButton.Enabled = false;
             PrintButton.Enabled = false;
+            pontuacao = 0;
+            txtpontuacao.Text = "Pontuação" + pontuacao;
 
+            Ciclo head = new Ciclo { x = 10, y = 5 };
+            Snake.Add(head);
 
+            for (int i = 0; i <10; i++)
+            {
+                Ciclo body = new Ciclo();
+                Snake.Add(body);
+            }
+
+            food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
+            GameTimer.Start();
 
         }
 
