@@ -32,7 +32,7 @@
             this.StartButton = new System.Windows.Forms.Button();
             this.PrintButton = new System.Windows.Forms.Button();
             this.picCanvas = new System.Windows.Forms.PictureBox();
-            this.Score = new System.Windows.Forms.Label();
+            this.txtPontuacao = new System.Windows.Forms.Label();
             this.Recorde = new System.Windows.Forms.Label();
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
@@ -74,16 +74,16 @@
             this.picCanvas.TabStop = false;
             this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.UpdatePictureBoxGraphics);
             // 
-            // Score
+            // txtPontuacao
             // 
-            this.Score.AutoSize = true;
-            this.Score.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Score.Location = new System.Drawing.Point(599, 249);
-            this.Score.Name = "Score";
-            this.Score.Size = new System.Drawing.Size(124, 18);
-            this.Score.TabIndex = 2;
-            this.Score.Text = "Pontuação: 0";
-            this.Score.Click += new System.EventHandler(this.Score_Click);
+            this.txtPontuacao.AutoSize = true;
+            this.txtPontuacao.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPontuacao.Location = new System.Drawing.Point(599, 249);
+            this.txtPontuacao.Name = "txtPontuacao";
+            this.txtPontuacao.Size = new System.Drawing.Size(124, 18);
+            this.txtPontuacao.TabIndex = 2;
+            this.txtPontuacao.Text = "Pontuação: 0";
+            this.txtPontuacao.Click += new System.EventHandler(this.Score_Click);
             // 
             // Recorde
             // 
@@ -107,7 +107,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(748, 725);
             this.Controls.Add(this.Recorde);
-            this.Controls.Add(this.Score);
+            this.Controls.Add(this.txtPontuacao);
             this.Controls.Add(this.picCanvas);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.StartButton);
@@ -126,7 +126,7 @@
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button PrintButton;
         private System.Windows.Forms.PictureBox picCanvas;
-        private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label txtPontuacao;
         private System.Windows.Forms.Label Recorde;
         private System.Windows.Forms.Timer GameTimer;
     }

@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SnakeGame
 {
     public partial class Form1 : Form
     {
-
         private List<Ciclo> Snake = new List<Ciclo>();
         private Ciclo food = new Ciclo();
 
@@ -25,15 +19,12 @@ namespace SnakeGame
         Random rand = new Random();
 
         bool goLeft, goRight, goDown, goUp;
-
-
         public Form1()
         {
             InitializeComponent();
 
             new Configurações();
         }
-
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -53,7 +44,6 @@ namespace SnakeGame
                 goDown = false;
             }
         }
-
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left && Configurações.direcoes != "direita")
@@ -73,7 +63,6 @@ namespace SnakeGame
                 goDown = true;
             }
         }
-
         private void StartGame(object sender, EventArgs e)
         {
             ResartGame();
@@ -81,9 +70,7 @@ namespace SnakeGame
 
         private void TakeSnapShot(object sender, EventArgs e)
         {
-
         }
-
         private void GameTimerEvent(object sender, EventArgs e)
         {
             if (goLeft)
@@ -103,7 +90,7 @@ namespace SnakeGame
                 Configurações.direcoes = "Cima";
             }
 
-            for (int i = Snake.Count; i < 0; i--)
+            for (int i = Snake.Count -1; i < 0; i--)
             {
                 if (i == 0)
                 {
@@ -122,11 +109,32 @@ namespace SnakeGame
                             Snake[i].y--;
                             break;
                     }
+
+                    if (Snake[i].x < 0)
+                    {
+                        Snake[i].x = maxWidth;
+                    }
+                    if (Snake[i].x > maxWidth)
+                    {
+                        Snake[i].x = 0;
+                    }
+                    if (Snake[i].y < 0)
+                    {
+                        Snake[i].y = maxHeight;
+                    }
+                    if (Snake[i].y > maxHeight)
+                    {
+                        Snake[i].y = 0;
+                    }
+                }
+                else
+                {
+                    Snake[i].x = Snake[i -1].x;
+                    Snake[i].y = Snake[i -1].y;
                 }
             }
-
+            picCanvas.Invalidate();
         }
-
         private void UpdatePictureBoxGraphics(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
@@ -163,7 +171,6 @@ namespace SnakeGame
         {
 
         }
-
         private void ResartGame()
         {
             maxWidth = picCanvas.Width / Configurações.Width - 1;
@@ -171,10 +178,11 @@ namespace SnakeGame
 
 
             Snake.Clear();
+
             StartButton.Enabled = false;
             PrintButton.Enabled = false;
             pontuacao = 0;
-            txtpontuacao.Text = "Pontuação" + pontuacao;
+            txtPontuacao.Text = "Pontuação: " + pontuacao;
 
             Ciclo head = new Ciclo { x = 10, y = 5 };
             Snake.Add(head);
@@ -187,18 +195,14 @@ namespace SnakeGame
 
             food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
             GameTimer.Start();
-
         }
-
         private void EatFood()
         {
 
         }
-
         private void GameOver()
         {
 
         }
-
     }
 }
