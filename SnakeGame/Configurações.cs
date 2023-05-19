@@ -11,13 +11,13 @@ namespace SnakeGame
 
         public static int Width { get; set; }
         public static int Height { get; set; }
-        public static string direcoes;
+        public static string directions;
 
         public Configurações()
         {
             Width = 16;
             Height = 16;
-            direcoes = "Esquerda";
+            directions = "Esquerda";
         }
 
 

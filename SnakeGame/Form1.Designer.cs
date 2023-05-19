@@ -33,7 +33,7 @@
             this.PrintButton = new System.Windows.Forms.Button();
             this.picCanvas = new System.Windows.Forms.PictureBox();
             this.txtPontuacao = new System.Windows.Forms.Label();
-            this.Recorde = new System.Windows.Forms.Label();
+            this.txtRecorde = new System.Windows.Forms.Label();
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
@@ -85,15 +85,15 @@
             this.txtPontuacao.Text = "Pontuação: 0";
             this.txtPontuacao.Click += new System.EventHandler(this.Score_Click);
             // 
-            // Recorde
+            // txtRecorde
             // 
-            this.Recorde.AutoSize = true;
-            this.Recorde.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Recorde.Location = new System.Drawing.Point(599, 293);
-            this.Recorde.Name = "Recorde";
-            this.Recorde.Size = new System.Drawing.Size(104, 18);
-            this.Recorde.TabIndex = 2;
-            this.Recorde.Text = "Recorde: 0";
+            this.txtRecorde.AutoSize = true;
+            this.txtRecorde.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRecorde.Location = new System.Drawing.Point(599, 293);
+            this.txtRecorde.Name = "txtRecorde";
+            this.txtRecorde.Size = new System.Drawing.Size(104, 18);
+            this.txtRecorde.TabIndex = 2;
+            this.txtRecorde.Text = "Recorde: 0";
             // 
             // GameTimer
             // 
@@ -106,7 +106,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(748, 725);
-            this.Controls.Add(this.Recorde);
+            this.Controls.Add(this.txtRecorde);
             this.Controls.Add(this.txtPontuacao);
             this.Controls.Add(this.picCanvas);
             this.Controls.Add(this.PrintButton);
@@ -127,7 +127,7 @@
         private System.Windows.Forms.Button PrintButton;
         private System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.Label txtPontuacao;
-        private System.Windows.Forms.Label Recorde;
+        private System.Windows.Forms.Label txtRecorde;
         private System.Windows.Forms.Timer GameTimer;
     }
 }
