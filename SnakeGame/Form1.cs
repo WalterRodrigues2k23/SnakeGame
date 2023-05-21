@@ -171,94 +171,100 @@ namespace SnakeGame
 
                     }
                 }
-                            
+
                 else
-            {
-                Snake[i].x = Snake[i - 1].x;
-                Snake[i].y = Snake[i - 1].y;
+                {
+                    Snake[i].x = Snake[i - 1].x;
+                    Snake[i].y = Snake[i - 1].y;
+                }
             }
+            picCanvas.Invalidate();
         }
-        picCanvas.Invalidate();
-        }
-    private void UpdatePictureBoxGraphics(object sender, PaintEventArgs e)
-    {
-        Graphics canvas = e.Graphics;
-        Brush snakeColour;
-
-        for (int i = 0; i < Snake.Count; i++)
+        private void UpdatePictureBoxGraphics(object sender, PaintEventArgs e)
         {
-            if (i == 0)
+            Graphics canvas = e.Graphics;
+            Brush snakeColour;
+
+            for (int i = 0; i < Snake.Count; i++)
             {
-                snakeColour = Brushes.Black;
-            }
-            else
-            {
-                snakeColour = Brushes.DarkGreen;
+                if (i == 0)
+                {
+                    snakeColour = Brushes.Black;
+                }
+                else
+                {
+                    snakeColour = Brushes.DarkGreen;
+                }
+
+                canvas.FillEllipse(snakeColour, new Rectangle
+                    (
+                    Snake[i].x * Configurações.Width,
+                    Snake[i].y * Configurações.Height,
+                    Configurações.Width, Configurações.Height
+                    ));
             }
 
-            canvas.FillEllipse(snakeColour, new Rectangle
-                (
-                Snake[i].x * Configurações.Width,
-                Snake[i].y * Configurações.Height,
-                Configurações.Width, Configurações.Height
-                ));
+            canvas.FillEllipse(Brushes.DarkRed, new Rectangle
+            (
+            food.x * Configurações.Width,
+            food.y * Configurações.Height,
+            Configurações.Width, Configurações.Height
+            ));
         }
 
-        canvas.FillEllipse(Brushes.DarkRed, new Rectangle
-        (
-        food.x * Configurações.Width,
-        food.y * Configurações.Height,
-        Configurações.Width, Configurações.Height
-        ));
-    }
-
-    private void Score_Click(object sender, EventArgs e)
-    {
-
-    }
-    private void ResartGame()
-    {
-        maxWidth = picCanvas.Width / Configurações.Width - 1;
-        maxHeight = picCanvas.Height / Configurações.Height - 1;
-
-
-        Snake.Clear();
-
-        StartButton.Enabled = false;
-        PrintButton.Enabled = false;
-        pontuacao = 0;
-        txtPontuacao.Text = "Pontuação: " + pontuacao;
-
-        Ciclo head = new Ciclo { x = 10, y = 5 };
-        Snake.Add(head);
-
-        for (int i = 0; i < 10; i++)
+        private void Score_Click(object sender, EventArgs e)
         {
-            Ciclo body = new Ciclo();
+
+        }
+        private void ResartGame()
+        {
+            maxWidth = picCanvas.Width / Configurações.Width - 1;
+            maxHeight = picCanvas.Height / Configurações.Height - 1;
+
+            
+            Snake.Clear();
+            pontuacao = 0;
+            score = 0;
+            if (score > pontuacao)
+            {
+                pontuacao = score;
+            }
+
+            StartButton.Enabled = false;
+            PrintButton.Enabled = false;
+
+            txtPontuacao.Text = "Pontuação: " + pontuacao;
+
+            Ciclo head = new Ciclo { x = 10, y = 5 };
+            Snake.Add(head);
+
+            for (int i = 0; i < 10; i++)
+            {
+                Ciclo body = new Ciclo();
+                Snake.Add(body);
+            }
+
+            food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
+            GameTimer.Start();
+        }
+        private void EatFood()
+        {
+            score += 1;
+
+            txtPontuacao.Text = "Pontuação: " + score;
+
+            Ciclo body = new Ciclo
+            {
+                x = Snake[Snake.Count - 1].x,
+                y = Snake[Snake.Count - 1].y
+            };
+
             Snake.Add(body);
+
+            food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
         }
-
-        food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
-        GameTimer.Start();
-    }
-    private void EatFood()
-    {
-        score += 1;
-
-        txtPontuacao.Text = "Pontuação: " + score;
-
-        Ciclo body = new Ciclo
+        private void GameOver()
         {
-            x = Snake[Snake.Count - 1].x,
-            y = Snake[Snake.Count - 1].y
-        };
-
-        Snake.Add(body);
-
-        food = new Ciclo { x = rand.Next(2, maxWidth), y = rand.Next(2, maxHeight) };
-    }
-    private void GameOver()
-    {
             GameTimer.Stop();
             StartButton.Enabled = true;
             PrintButton.Enabled = true;
@@ -270,6 +276,6 @@ namespace SnakeGame
                 txtRecorde.ForeColor = Color.Maroon;
                 txtRecorde.TextAlign = ContentAlignment.MiddleCenter;
             }
+        }
     }
-}
 }
